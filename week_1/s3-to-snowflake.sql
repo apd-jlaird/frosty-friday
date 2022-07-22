@@ -28,5 +28,9 @@ select $1,$2,$3,$4,$5,$6,$7,$8,$9,$10 from @ff_week_1_csv_stage (file_format => 
 
 
 -- copy into
+-- copy data to table
+copy into onboarding.raw_data.stg_iowa_liquor_sales from @raw_data_stage
+    file_format = raw_data_format
+    pattern = 'iowa_liquor_data_raw.csv';
 
 -- cross-check row count between stage and table
