@@ -15,7 +15,7 @@ list @ff_week_2;
 -- Create file format
 create or replace file format ff_week_2 type = parquet;
 
--- Check first 3 rows of file in stage to validate schema
+-- Check source file schema
 select $1::variant from @ff_week_2/employees.parquet (file_format => 'ff_week_2') where metadata$file_row_number <= 3;
 
 -- Create raw data table
