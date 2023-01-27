@@ -37,3 +37,7 @@ delete from ff_week_1 where content is null; -- Cannot find a way to do this wit
 
 -- Query table preserving original row order
 select * from ff_week_1 order by 2,3;
+
+-- Cleanup
+drop stage ff_week_1;
+drop table ff_week_1;
