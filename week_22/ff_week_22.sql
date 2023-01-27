@@ -1,5 +1,5 @@
 ------------------------------------------------------------
--- Frosty Friday week_22
+-- Frosty Friday Week 22
 ------------------------------------------------------------
 use role jamielaird;
 use database jamielaird;
