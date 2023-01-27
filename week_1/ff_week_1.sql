@@ -13,11 +13,11 @@ create or replace stage ff_week_1
 list @ff_week_1;
 
 -- Check first 5 rows x 5 columns of each file in stage to validate schema
-select metadata$filename, $1, $2, $3, $4, $5 from @ff_week_1/1.csv
+select metadata$filename, $1, $2, $3 from @ff_week_1/1.csv where metadata$file_row_number <=3
 union all
-select metadata$filename, $1, $2, $3, $4, $5 from @ff_week_1/2.csv
+select metadata$filename, $1, $2, $3 from @ff_week_1/2.csv where metadata$file_row_number <=3
 union all
-select metadata$filename, $1, $2, $3, $4, $5 from @ff_week_1/3.csv;
+select metadata$filename, $1, $2, $3 from @ff_week_1/3.csv where metadata$file_row_number <=3;
 
 -- Create table (including metadata and loaded at columns)
 create or replace table ff_week_1 (
