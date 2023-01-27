@@ -21,8 +21,8 @@ select metadata$filename, $1, $2, $3 from @ff_week_1/3.csv where metadata$file_r
 
 -- Create table (including metadata and loaded at columns)
 create or replace table ff_week_1 (
-    content text,
-    metadata_filename text,
+    content varchar,
+    metadata_filename varchar,
     metadata_file_row_number int,
     loaded_at timestamp_ntz default current_timestamp()
 );
