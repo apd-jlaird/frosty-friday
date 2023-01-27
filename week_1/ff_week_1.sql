@@ -1,5 +1,6 @@
 ------------------------------------------------------------
 -- Frosty Friday Week 1
+-- https://frostyfriday.org/2022/07/14/week-1/
 ------------------------------------------------------------
 use role jamielaird;
 use database jamielaird;

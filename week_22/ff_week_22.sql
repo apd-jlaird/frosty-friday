@@ -1,5 +1,6 @@
 ------------------------------------------------------------
 -- Frosty Friday Week 22
+-- https://frostyfriday.org/2022/11/11/week-22-basic/
 ------------------------------------------------------------
 use role jamielaird;
 use database jamielaird;

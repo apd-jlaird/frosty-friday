@@ -1,5 +1,6 @@
 ------------------------------------------------------------
 -- Frosty Friday Week 31
+-- https://frostyfriday.org/2023/01/27/week-31-basic/
 ------------------------------------------------------------
 use role jamielaird;
 use database jamielaird;

@@ -1,5 +1,6 @@
 ------------------------------------------------------------
 -- Frosty Friday Week 2
+-- https://frostyfriday.org/2022/07/15/week-2-intermediate/
 ------------------------------------------------------------
 use role jamielaird;
 use database jamielaird;
