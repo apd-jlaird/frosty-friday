@@ -7,9 +7,13 @@ use database jamielaird;
 use schema frosty_friday;
 
 -- Starting data
-create or replace table w31(id int, hero_name string, villains_defeated number);
+create or replace table ff_week_31 (
+    id int,
+    hero_name varchar,
+    villains_defeated int
+);
 
-insert into w31 values
+insert into ff_week_31 values
   (1, 'Pigman', 5),
   (2, 'The OX', 10),
   (3, 'Zaranine', 4),
@@ -19,11 +23,13 @@ insert into w31 values
   (7, 'Dezzin', 2.3),
   (8, 'Orn', 7),
   (9, 'Killder', 6),
-  (10, 'PolarBeast', 11)
-  ;
+  (10, 'PolarBeast', 11);
 
 -- Solution
 select
     max_by(hero_name, villains_defeated) as best_hero,
     min_by(hero_name, villains_defeated) as worst_hero
-from w31;
+from ff_week_31;
+
+-- Cleanup
+drop table ff_week_31;
