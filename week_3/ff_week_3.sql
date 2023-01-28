@@ -38,7 +38,7 @@ group by 1;
 -- Using -5 for compatibility with DataGrip
 -- https://community.snowflake.com/s/question/0D50Z00009C5eieSAB/is-there-a-way-to-select-from-the-list-stage-output-as-a-table)
 insert into ff_week_3_filenames (filename, number_of_rows)
-    select *
+    select filename, number_of_rows
     from table(result_scan(last_query_id(-5)));
 
 -- Create final table
