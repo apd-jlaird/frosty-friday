@@ -26,3 +26,7 @@ $$;
 
 -- Test function
 select timesthree(start_int) from ff_week_5;
+
+-- Cleanup
+drop table ff_week_5;
+drop function timesthree;
