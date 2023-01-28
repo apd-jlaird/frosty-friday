@@ -61,10 +61,9 @@ create or replace temporary table ff_week_6_cp_raw as (
  https://theinformationlab.nl/2022/10/03/geo-spatial-objects-in-snowflake/
  */
 
--- Creating regional polygons
--- Set geography output format to WKT
 alter session set geography_output_format = 'WKT';
 
+-- Create region polygons
 create or replace temporary table ff_week_6_nr_polygons as (
 
 -- create a geography object containing each point
@@ -80,7 +79,7 @@ with points as (
     from ff_week_6_nr_raw
 ),
 
--- get the first point for nation or region
+-- get the first point for each nation or region
 points_0 as (
     select
         nation_or_region_name,
@@ -108,7 +107,7 @@ collect_points as (
 ),
 
 -- join start and end points with other points
-lines as (
+lines_tbl as (
     select
         cp.nation_or_region_name,
         cp.type,
@@ -123,15 +122,139 @@ lines as (
         and cp.part = pz.part
 ),
 
+-- construct lines
+lines as (
+    select
+        nation_or_region_name,
+        type,
+        part,
+        seq,
+        st_makeline(geo_points_0, collection_points) as geo_lines
+    from lines_tbl
+),
 
-
+-- construct polygons
+pols as (
+    select
+        nation_or_region_name,
+        type,
+        part,
+        seq,
+        st_makepolygon(geo_lines) as part_pols
+    from lines
 )
 
+-- group by nation and type
+select
+    nation_or_region_name,
+    type,
+    st_collect(part_pols) as all_pols
+from pols
+group by
+    nation_or_region_name,
+    type
+);
 
+-- Create constituency polygons
+create or replace temporary table ff_week_6_cp_polygons as (
 
+-- create a geography object containing each point
+with points as (
+    select
+        constituency,
+        sequence_num,
+        longitude,
+        latitude,
+        part,
+        st_makepoint(longitude, latitude) as geo_points
+    from ff_week_6_cp_raw
+),
 
+-- get the first point for each constituency
+points_0 as (
+    select
+        constituency,
+        sequence_num,
+        longitude,
+        latitude,
+        part,
+        st_makepoint(longitude, latitude) as geo_points_0
+    from ff_week_6_cp_raw
+    where sequence_num = 0
+),
+
+-- collect everything together
+collect_points as (
+    select
+        constituency,
+        part,
+        array_agg(sequence_num) as seq,
+        st_collect(geo_points) as collection_points
+    from points
+    where sequence_num > 0
+    group by 1,2
+),
+
+-- join start and end points with other points
+lines_tbl as (
+    select
+        cp.constituency,
+        cp.part,
+        cp.seq,
+        cp.collection_points,
+        pz.geo_points_0
+    from collect_points cp
+    left join points_0 pz
+        on cp.constituency = pz.constituency
+        and cp.part = pz.part
+),
+
+-- construct lines
+lines as (
+    select
+        constituency,
+        part,
+        seq,
+        st_makeline(geo_points_0, collection_points) as geo_lines
+    from lines_tbl
+),
+
+-- construct polygons
+pols as (
+    select
+        constituency,
+        part,
+        seq,
+        st_makepolygon(geo_lines) as part_pols
+    from lines
+)
+
+-- group by constituency
+select
+    constituency,
+    st_collect(part_pols) as all_pols
+from pols
+group by
+    constituency
+);
+
+-- Create view showing count of intersecting constituencies per nation or region
+create or replace view ff_week_6 as (
+    select
+        nr.nation_or_region_name as nation_or_region,
+        count(cp.constituency) as intersecting_constituencies
+    from ff_week_6_nr_polygons nr
+    left join ff_week_6_cp_polygons cp
+        on st_intersects(nr.all_pols, cp.all_pols)
+    group by 1
+    order by 2 desc
+);
+
+-- Check result
+select * from ff_week_6;
 
 -- Cleanup
 drop stage ff_week_6;
 drop file format ff_week_6_csv_temp,
 drop file format ff_week_6_csv;
+drop view ff_week_6;
