@@ -3,5 +3,3 @@ frosty-friday.iml
 modules.xml
 vcs.xml
 .idea
-week_8/.venv/
-week_8/.streamlit/secrets.toml
