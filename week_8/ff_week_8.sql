@@ -2,7 +2,7 @@
 -- Frosty Friday Week 8
 -- https://frostyfriday.org/2022/08/05/week-8-basic/
 ------------------------------------------------------------
-use role securityadmin;
+use role jamielaird;
 use database jamielaird;
 use schema frosty_friday;
 
@@ -19,16 +19,16 @@ create or replace file format ff_week_8_csv
 select $1 from @ff_week_8/payments.csv (file_format => ff_week_8_csv);
 
 -- Load to table
-create or replace table payments as (
+create or replace table ff_week_8 as (
     select
-        $1::int as id,
+        $1::number as id,
         $2::timestamp_ntz as payment_date,
         $3::varchar as card_type,
-        $4::int as amount_spent
+        $4::number as amount_spent
     from @ff_week_8/payments.csv (file_format => ff_week_8_csv)
 );
 
 -- Cleanup
 drop stage if exists ff_week_8;
 drop file format if exists ff_week_8_csv;
-drop table if exists payments;
+drop table if exists ff_week_8;
