@@ -1,21 +1,18 @@
 ------------------------------------------------------------
--- Frosty Friday Week 7
--- https://frostyfriday.org/2022/07/29/week-7-intermediate/
+-- Frosty Friday Week 7 - Starter Code
 ------------------------------------------------------------
 use role jamielaird;
-
-/* STARTER CODE FOR WEEK 7 */
-
 use warehouse jamielaird;
 use database jamielaird;
 use schema frosty_friday;
 
+-- Create tables
 create or replace table week7_villain_information (
-	id INT,
-	first_name VARCHAR(50),
-	last_name VARCHAR(50),
-	email VARCHAR(50),
-	Alter_Ego VARCHAR(50)
+	id int,
+	first_name varchar(50),
+	last_name varchar(50),
+	email varchar(50),
+	Alter_Ego varchar(50)
 );
 insert into week7_villain_information (id, first_name, last_name, email, Alter_Ego) values (1, 'Chrissy', 'Riches', 'criches0@ning.com', 'Waterbuck, defassa');
 insert into week7_villain_information (id, first_name, last_name, email, Alter_Ego) values (2, 'Libbie', 'Fargher', 'lfargher1@vistaprint.com', 'Ibis, puna');
@@ -29,9 +26,9 @@ insert into week7_villain_information (id, first_name, last_name, email, Alter_E
 insert into week7_villain_information (id, first_name, last_name, email, Alter_Ego) values (10, 'Tadeas', 'Thorouggood', 'tthorouggood9@va.gov', 'Armadillo, nine-banded');
 
 create or replace table week7_monster_information (
-	id INT,
-	monster VARCHAR(50),
-	hideout_location VARCHAR(50)
+	id int,
+	monster varchar(50),
+	hideout_location varchar(50)
 );
 
 insert into week7_monster_information (id, monster, hideout_location) values (1, 'Northern elephant seal', 'Huangban');
@@ -45,13 +42,12 @@ insert into week7_monster_information (id, monster, hideout_location) values (8,
 insert into week7_monster_information (id, monster, hideout_location) values (9, 'Yellow-necked spurfowl', 'Sezemice');
 insert into week7_monster_information (id, monster, hideout_location) values (10, 'Agouti', 'Najd al Jumā‘ī');
 
-
 create table week7_weapon_storage_location (
-	id INT,
-	created_by VARCHAR(50),
-	location VARCHAR(50),
-	catch_phrase VARCHAR(50),
-	weapon VARCHAR(50)
+	id int,
+	created_by varchar(50),
+	location varchar(50),
+	catch_phrase varchar(50),
+	weapon varchar(50)
 );
 
 insert into week7_weapon_storage_location (id, created_by, location, catch_phrase, weapon)
@@ -75,10 +71,10 @@ insert into week7_weapon_storage_location (id, created_by, location, catch_phras
 insert into week7_weapon_storage_location (id, created_by, location, catch_phrase, weapon)
     values (10, 'Will-Thiel', 'Zafar', 'Robust even-keeled algorithm', 'Tin');
 
---Create Tags
+-- Create tags
 create or replace tag security_class comment = 'sensitive data';
 
---Apply tags
+-- Apply tags
 alter table week7_villain_information set tag security_class = 'Level Super Secret A+++++++';
 alter table week7_monster_information set tag security_class = 'Level B';
 alter table week7_weapon_storage_location set tag security_class = 'Level Super Secret A+++++++';
@@ -86,12 +82,12 @@ alter table week7_weapon_storage_location set tag security_class = 'Level Super 
 -- Elevate role to create new roles
 use role securityadmin;
 
---Create Roles
+-- Create roles
 create role ff_user1;
 create role ff_user2;
 create role ff_user3;
 
---Assign Roles to yourself with all needed privileges
+-- Assign roles to yourself with all needed privileges
 grant role ff_user1 to role accountadmin;
 grant usage on warehouse jamielaird to role ff_user1;
 grant usage on database jamielaird to role ff_user1;
@@ -110,7 +106,7 @@ grant usage on database jamielaird to role ff_user3;
 grant usage on all schemas in database jamielaird to role ff_user3;
 grant select on all tables in database jamielaird to role ff_user3;
 
---Queries to build history
+-- Queries to build history
 use role ff_user1;
 select * from week7_villain_information;
 
