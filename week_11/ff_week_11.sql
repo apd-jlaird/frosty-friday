@@ -17,7 +17,7 @@ create or replace file format ff_week_11_csv
     skip_header = 1;
 
 -- Explore file
-select $1 from @ff_week_11/milk_data.csv (file_format => ff_week_11_csv);
+--select $1 from @ff_week_11/milk_data.csv (file_format => ff_week_11_csv);
 
 -- Load milk data to table
 create or replace table ff_week_11 as (
@@ -37,9 +37,50 @@ create or replace table ff_week_11 as (
     from @ff_week_11/milk_data.csv (file_format => ff_week_11_csv)
 );
 
+-- TASK 1: Remove all the centrifuge dates and centrifuge kwph and replace them with NULLs WHERE fat = 3.
+-- Add note to task_used.
+create or replace task whole_milk_updates
+    warehouse = jamielaird
+    --schedule = '1400 minutes' -- removed to test
+    as
+    update ff_week_11
+    set
+        centrifuge_start_time = null,
+        centrifuge_end_time = null,
+        centrifuge_processing_time = null,
+        centrifuge_kwph = null,
+        task_used = system$current_user_task_name() || ' at ' || current_timestamp()
+    where fat_percentage = 3;
+
+-- TASK 2: Calculate centrifuge processing time (difference between start and end time) WHERE fat != 3.
+-- Add note to task_used.
+create or replace task skim_milk_updates
+    warehouse = jamielaird
+    after whole_milk_updates
+    as
+    update ff_week_11
+    set
+        centrifuge_processing_time = datediff(mi, centrifuge_start_time, centrifuge_end_time    ),
+        task_used = system$current_user_task_name() || ' at ' || current_timestamp()
+    where fat_percentage != 3;
+
+-- Manually execute the task.
+execute task whole_milk_updates;
+
+-- Check that the data looks as it should.
 select * from ff_week_11;
+
+-- Check that the numbers are correct.
+select task_used, count(*) as row_count from ff_week_11 group by task_used;
 
 -- Cleanup
 drop stage if exists ff_week_11;
 drop file format if exists ff_week_11_csv;
 drop table if exists ff_week_11;
+drop task if exists whole_milk_updates;
+drop task if exists skim_milk_updates;
+
+-- Check task history
+select *
+from table(information_schema.task_history())
+order by scheduled_time desc;
