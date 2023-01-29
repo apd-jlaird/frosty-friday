@@ -22,7 +22,7 @@ select $1 from @ff_week_8/payments.csv (file_format => ff_week_8_csv);
 create or replace table ff_week_8 as (
     select
         $1::number as id,
-        $2::timestamp_ntz as payment_date,
+        $2::varchar as payment_date,
         $3::varchar as card_type,
         $4::number as amount_spent
     from @ff_week_8/payments.csv (file_format => ff_week_8_csv)
