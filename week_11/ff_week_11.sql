@@ -73,14 +73,14 @@ select * from ff_week_11;
 -- Check that the numbers are correct.
 select task_used, count(*) as row_count from ff_week_11 group by task_used;
 
+-- Check task history
+select *
+from table(information_schema.task_history())
+order by scheduled_time desc;
+
 -- Cleanup
 drop stage if exists ff_week_11;
 drop file format if exists ff_week_11_csv;
 drop table if exists ff_week_11;
 drop task if exists whole_milk_updates;
 drop task if exists skim_milk_updates;
-
--- Check task history
-select *
-from table(information_schema.task_history())
-order by scheduled_time desc;
