@@ -255,6 +255,6 @@ select * from ff_week_6;
 
 -- Cleanup
 drop stage ff_week_6;
-drop file format ff_week_6_csv_temp,
+drop file format ff_week_6_csv_temp;
 drop file format ff_week_6_csv;
 drop view ff_week_6;
