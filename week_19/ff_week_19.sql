@@ -75,4 +75,4 @@ unset start_date;
 unset row_count;
 drop table if exists ff_week_19;
 drop table if exists ff_week_19_testing;
-drop function if exists ff_week_19;
+drop function if exists ff_week_19(date, date, boolean);
