@@ -5,7 +5,7 @@ use role jamielaird;
 use database jamielaird;
 use schema frosty_friday;
 
-create table ff_week_19_testing (
+create or replace table ff_week_19_testing (
 id INT,
 start_date DATE,
 end_date DATE
