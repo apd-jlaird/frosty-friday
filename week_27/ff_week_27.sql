@@ -16,5 +16,11 @@ select
     * rename icecreambrandowner as ice_cream_brand_owner -- https://docs.snowflake.com/en/sql-reference/sql/select.html#parameters
 from ff_week_27;
 
+-- Combined query
+select *
+    exclude milktype
+    rename icecreambrandowner as ice_cream_brand_owner
+from ff_week_27;
+
 -- Cleanup
 drop table if exists ff_week_27;
