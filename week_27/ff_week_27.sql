@@ -7,11 +7,13 @@ use database jamielaird;
 use schema frosty_friday;
 
 -- Select * excluding milktype
-select * exclude milktype -- https://docs.snowflake.com/en/sql-reference/sql/select.html#parameters
+select *
+    exclude milktype -- https://docs.snowflake.com/en/sql-reference/sql/select.html#parameters
 from ff_week_27;
 
 -- Rename icecreambrandowner to ice_cream_brand_owner
-select * rename icecreambrandowner as ice_cream_brand_owner -- https://docs.snowflake.com/en/sql-reference/sql/select.html#parameters
+select *
+    rename icecreambrandowner as ice_cream_brand_owner -- https://docs.snowflake.com/en/sql-reference/sql/select.html#parameters
 from ff_week_27;
 
 -- Combined query
