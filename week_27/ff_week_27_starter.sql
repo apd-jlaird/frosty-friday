@@ -2,7 +2,6 @@
 -- Frosty Friday Week 27 - Starter Code
 ------------------------------------------------------------
 use role jamielaird;
-use warehouse jamielaird;
 use database jamielaird;
 use schema frosty_friday;
 
