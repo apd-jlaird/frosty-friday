@@ -2,6 +2,9 @@
 -- Frosty Friday Week 21
 -- https://frostyfriday.org/2022/11/04/week-21-basic/
 ------------------------------------------------------------
+use role jamielaird;
+use database jamielaird;
+use schema frosty_friday;
 
 -- Starting data
 create or replace table hero_powers (
@@ -44,3 +47,5 @@ select
 from main_power
 left join secondary_power
     on main_power.hero_name = secondary_power.hero_name;
+
+-- Cleanup
