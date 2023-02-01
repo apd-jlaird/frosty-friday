@@ -4,6 +4,7 @@
 ------------------------------------------------------------
 
 /*
+
 ------------------------------------------------------------
 -- TERMINAL
 ------------------------------------------------------------
@@ -25,7 +26,8 @@ $ rm -rf ./__MACOSX
 
 -- Open SnowSQL
 $ snowsql
- */
+
+*/
 
 ------------------------------------------------------------
 -- SNOWSQL
@@ -99,3 +101,6 @@ select * from ff_week_23;
 drop stage if exists ff_week_23;
 drop file format if exists ff_week_23_csv;
 drop table if exists ff_week_23;
+
+-- Exit SnowSQL
+!quit
