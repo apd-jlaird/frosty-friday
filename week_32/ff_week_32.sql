@@ -58,6 +58,5 @@ use role policy_admin;
 drop session policy jamielaird.frosty_friday.session_policy_ui_user;
 drop session policy jamielaird.frosty_friday.session_policy_non_ui_user;
 
-
 -- Docs
 -- https://docs.snowflake.com/en/user-guide/session-policies.html#step-6-replicate-the-session-policy-to-a-target-account
