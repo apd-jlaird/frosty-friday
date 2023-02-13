@@ -28,7 +28,7 @@ insert into data_to_be_masked (first_name, last_name, hero_name) values ('Ware',
 use role securityadmin;
 
 -- Create role
-create role ff_foo1;
-create role ff_foo2;
+create or replace role ff_foo1;
+create or replace role ff_foo2;
 grant role ff_foo1 to user jamielaird;
 grant role ff_foo2 to user jamielaird;
