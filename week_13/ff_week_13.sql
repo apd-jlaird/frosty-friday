@@ -36,7 +36,7 @@ create table testing_data_filled as (
     select 
         product,
         stock_amount,
-        coalesce(stock_amount, lag(stock_amount) ignore nulls over (partition by product order by date_of_check))as stock_amount_filled_out,
+        coalesce(stock_amount, lag(stock_amount) ignore nulls over (partition by product order by date_of_check)) as stock_amount_filled_out,
         date_of_check
     from testing_data
     order by product, date_of_check
@@ -53,4 +53,4 @@ drop table if exists testing_data_filled;
 ------------------------------------------------------------
 -- RESOURCES
 ------------------------------------------------------------
-https://docs.snowflake.com/en/sql-reference/functions/last_value
+-- https://docs.snowflake.com/en/sql-reference/functions/last_value
