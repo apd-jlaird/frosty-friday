@@ -59,3 +59,9 @@ order by amount_sold;
 drop stage if exists w35_external_stage;
 drop file format if exists w35_csv;
 drop table if exists w35_external_table;
+
+------------------------------------------------------------
+-- Resources
+------------------------------------------------------------
+-- https://docs.snowflake.com/en/sql-reference/sql/create-external-table
+-- https://docs.snowflake.com/en/user-guide/tables-external-intro
