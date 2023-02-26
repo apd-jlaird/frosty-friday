@@ -47,7 +47,7 @@ select sale_month, id, drug_name, amount_sold from w35_external_table;
 ------------------------------------------------------------
 select
     sale_month,
-	id,
+    id,
     drug_name,
     amount_sold
 from w35_external_table
