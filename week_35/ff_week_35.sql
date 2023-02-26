@@ -26,7 +26,7 @@ create or replace file format w35_csv
     field_optionally_enclosed_by = '"';
 
 -- Inspect file
-select $1 from @w35_external_stage/2022/01/salesdata_71983.csv (file_format => w35_csv_inspect);
+select $1 from @w35_external_stage/2022/01/salesdata_71983.csv (file_format => w35_csv);
 
 -- Create external table
 create or replace external table w35_external_table (
