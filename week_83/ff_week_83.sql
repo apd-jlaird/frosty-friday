@@ -3,6 +3,7 @@
 -- https://frostyfriday.org/blog/2024/03/01/week-83-basic/
 ------------------------------------------------------------
 use role JAMIELAIRD;
+use warehouse JAMIELAIRD;
 use database JAMIELAIRD;
 use schema FROSTY_FRIDAY;
 
