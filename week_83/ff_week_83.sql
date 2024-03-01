@@ -10,16 +10,15 @@ use schema frosty_friday;
 -- Startup Code
 ------------------------------------------------------------
 -- Create sales_data table
-CREATE TABLE sales_data (
-  product_id INT,
-  quantity_sold INT,
-  price DECIMAL(10,2),
-  transaction_date DATE
+create or replace table SALES_DATA (
+  PRODUCT_ID int,
+  QUANTITY_SOLD int,
+  PRICE decimal(10,2),
+  TRANSACTION_DATE DATE
 );
 
 -- Insert sample values
-INSERT INTO sales_data (product_id, quantity_sold, price, transaction_date)
-VALUES
+insert into SALES_DATA (PRODUCT_ID, QUANTITY_SOLD, PRICE, TRANSACTION_DATE) values
   (1, 10, 15.99, '2024-02-01'),
   (1, 8, 15.99, '2024-02-05'),
   (2, 15, 22.50, '2024-02-02'),
@@ -41,7 +40,7 @@ from
   SALES_DATA
 group by
   PRODUCT_ID
-qualify ROW_NUMBER() over (order by REVENUE desc) <= 10);
+qualify ROW_NUMBER() over (order by REVENUE desc) <= 10;
 
 ------------------------------------------------------------
 -- Cleanup
