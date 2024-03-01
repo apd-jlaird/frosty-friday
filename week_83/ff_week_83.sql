@@ -2,9 +2,9 @@
 -- Frosty Friday Week 83
 -- https://frostyfriday.org/blog/2024/03/01/week-83-basic/
 ------------------------------------------------------------
-use role jamielaird;
-use database jamielaird;
-use schema frosty_friday;
+use role JAMIELAIRD;
+use database JAMIELAIRD;
+use schema FROSTY_FRIDAY;
 
 ------------------------------------------------------------
 -- Startup Code
